@@ -4,6 +4,11 @@ const operationBtns = document.querySelectorAll(".buttons__btn-operator");
 let buffer = "";
 let previousOperation;
 
+const reset = () => {
+    buffer = "";
+    screen.textContent = "0";
+};
+
 numberBtns.forEach((numberBtn) => {
     numberBtn.addEventListener("click", () => {
         buffer += numberBtn.getAttribute("id");
@@ -38,6 +43,10 @@ operationBtns.forEach((operationBtn) => {
                 previousOperation = ".";
                 buffer += ".";
                 screen.textContent = buffer;
+                break;
+            case "reset":
+                reset();
+                break;
         }
     });
 });
