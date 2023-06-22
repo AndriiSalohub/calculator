@@ -7,13 +7,13 @@ let previousOperation = "";
 
 const reset = () => {
     buffer = "";
-    screen.textContent = "0";
+    screen.value = "0";
     previousOperation = "";
 };
 
 const calculate = (sample) => {
     buffer = eval(sample.replace(/\×/g, "*")) + "";
-    screen.textContent = buffer;
+    screen.value = buffer;
     previousOperation = "";
 };
 
@@ -21,20 +21,20 @@ const checkPreviousOperation = (previousOperation) => {
     if (previousOperation !== ".") {
         if (buffer.at(-1) !== " ") {
             buffer += ` ${previousOperation} `;
-            screen.textContent = buffer;
+            screen.value = buffer;
         } else {
             buffer = buffer.slice(0, buffer.length - 3);
             buffer += ` ${previousOperation} `;
-            screen.textContent = buffer;
+            screen.value = buffer;
         }
     } else {
         if (buffer.at(-1) !== " ") {
             buffer += `${previousOperation}`;
-            screen.textContent = buffer;
+            screen.value = buffer;
         } else {
             buffer = buffer.slice(0, buffer.length - 3);
             buffer += `${previousOperation}`;
-            screen.textContent = buffer;
+            screen.value = buffer;
         }
     }
 };
@@ -42,20 +42,20 @@ const checkPreviousOperation = (previousOperation) => {
 delBtn.addEventListener("click", () => {
     if (buffer.length === 1 || buffer.length === 0) {
         buffer = "";
-        screen.textContent = "0";
+        screen.value = "0";
     } else if (buffer.at(-1) === " ") {
         buffer = buffer.slice(0, buffer.length - 3);
-        screen.textContent = buffer;
+        screen.value = buffer;
     } else {
         buffer = buffer.slice(0, buffer.length - 1);
-        screen.textContent = buffer;
+        screen.value = buffer;
     }
 });
 
 numberBtns.forEach((numberBtn) => {
     numberBtn.addEventListener("click", () => {
         buffer += numberBtn.getAttribute("id");
-        screen.textContent = buffer;
+        screen.value = buffer;
     });
 });
 
