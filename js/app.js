@@ -3,17 +3,40 @@ const numberBtns = document.querySelectorAll(".buttons__btn-number");
 const operationBtns = document.querySelectorAll(".buttons__btn-operator");
 const delBtn = document.querySelector("#del");
 let buffer = "";
-let previousOperation;
+let previousOperation = "";
 
 const reset = () => {
     buffer = "";
     screen.textContent = "0";
+    previousOperation = "";
 };
 
 const calculate = (sample) => {
     buffer = eval(sample.replace(/\×/g, "*")) + "";
     screen.textContent = buffer;
     previousOperation = "";
+};
+
+const checkPreviousOperation = (previousOperation) => {
+    if (previousOperation !== ".") {
+        if (buffer.at(-1) !== " ") {
+            buffer += ` ${previousOperation} `;
+            screen.textContent = buffer;
+        } else {
+            buffer = buffer.slice(0, buffer.length - 3);
+            buffer += ` ${previousOperation} `;
+            screen.textContent = buffer;
+        }
+    } else {
+        if (buffer.at(-1) !== " ") {
+            buffer += `${previousOperation}`;
+            screen.textContent = buffer;
+        } else {
+            buffer = buffer.slice(0, buffer.length - 3);
+            buffer += `${previousOperation}`;
+            screen.textContent = buffer;
+        }
+    }
 };
 
 delBtn.addEventListener("click", () => {
@@ -38,38 +61,37 @@ numberBtns.forEach((numberBtn) => {
 
 operationBtns.forEach((operationBtn) => {
     operationBtn.addEventListener("click", () => {
-        switch (operationBtn.getAttribute("id")) {
-            case "+":
-                previousOperation = "+";
-                buffer += " + ";
-                screen.textContent = buffer;
-                break;
-            case "-":
-                previousOperation = "-";
-                buffer += " - ";
-                screen.textContent = buffer;
-                break;
-            case "×":
-                previousOperation = "×";
-                buffer += " × ";
-                screen.textContent = buffer;
-                break;
-            case "/":
-                previousOperation = "/";
-                buffer += " / ";
-                screen.textContent = buffer;
-                break;
-            case ".":
-                previousOperation = ".";
-                buffer += ".";
-                screen.textContent = buffer;
-                break;
-            case "reset":
-                reset();
-                break;
-            case "=":
-                calculate(buffer);
-                break;
+        if (buffer.length < 1) {
+            operationBtn.disable = true;
+        } else {
+            switch (operationBtn.getAttribute("id")) {
+                case "+":
+                    previousOperation = "+";
+                    checkPreviousOperation(previousOperation);
+                    break;
+                case "-":
+                    previousOperation = "-";
+                    checkPreviousOperation(previousOperation);
+                    break;
+                case "×":
+                    previousOperation = "×";
+                    checkPreviousOperation(previousOperation);
+                    break;
+                case "/":
+                    previousOperation = "/";
+                    checkPreviousOperation(previousOperation);
+                    break;
+                case ".":
+                    previousOperation = ".";
+                    checkPreviousOperation(previousOperation);
+                    break;
+                case "reset":
+                    reset();
+                    break;
+                case "=":
+                    calculate(buffer);
+                    break;
+            }
         }
     });
 });
