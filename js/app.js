@@ -12,7 +12,7 @@ const reset = () => {
 };
 
 const calculate = (sample) => {
-    buffer = eval(sample.replace(/\×/g, "*")).toFixed(6) + "";
+    buffer = eval(sample.replace(/\×/g, "*")) + "";
     screen.textContent = buffer;
     previousOperation = "";
 };
