@@ -9,6 +9,12 @@ const reset = () => {
     screen.textContent = "0";
 };
 
+const calculate = (sample) => {
+    buffer = eval(sample);
+    screen.textContent = buffer;
+    previousOperation = "";
+};
+
 numberBtns.forEach((numberBtn) => {
     numberBtn.addEventListener("click", () => {
         buffer += numberBtn.getAttribute("id");
@@ -46,6 +52,9 @@ operationBtns.forEach((operationBtn) => {
                 break;
             case "reset":
                 reset();
+                break;
+            case "=":
+                calculate(buffer);
                 break;
         }
     });
