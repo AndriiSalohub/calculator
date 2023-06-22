@@ -1,6 +1,7 @@
 const screen = document.querySelector(".screen");
 const numberBtns = document.querySelectorAll(".buttons__btn-number");
 const operationBtns = document.querySelectorAll(".buttons__btn-operator");
+const delBtn = document.querySelector("#del");
 let buffer = "";
 let previousOperation;
 
@@ -10,10 +11,23 @@ const reset = () => {
 };
 
 const calculate = (sample) => {
-    buffer = eval(sample);
+    buffer = eval(sample.replace(/\×/g, "*")) + "";
     screen.textContent = buffer;
     previousOperation = "";
 };
+
+delBtn.addEventListener("click", () => {
+    if (buffer.length === 1 || buffer.length === 0) {
+        buffer = "";
+        screen.textContent = "0";
+    } else if (buffer.at(-1) === " ") {
+        buffer = buffer.slice(0, buffer.length - 3);
+        screen.textContent = buffer;
+    } else {
+        buffer = buffer.slice(0, buffer.length - 1);
+        screen.textContent = buffer;
+    }
+});
 
 numberBtns.forEach((numberBtn) => {
     numberBtn.addEventListener("click", () => {
