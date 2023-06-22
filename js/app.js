@@ -12,7 +12,7 @@ const reset = () => {
 };
 
 const calculate = (sample) => {
-    buffer = eval(sample.replace(/\×/g, "*")) + "";
+    buffer = eval(sample.replace(/\×/g, "*")).toFixed(6) + "";
     screen.textContent = buffer;
     previousOperation = "";
 };
@@ -60,7 +60,7 @@ numberBtns.forEach((numberBtn) => {
 });
 
 operationBtns.forEach((operationBtn) => {
-    operationBtn.addEventListener("click", () => {
+    operationBtn.addEventListener("click", (e) => {
         if (buffer.length < 1) {
             operationBtn.disable = true;
         } else {
@@ -82,9 +82,21 @@ operationBtns.forEach((operationBtn) => {
                     checkPreviousOperation(previousOperation);
                     break;
                 case ".":
-                    previousOperation = ".";
-                    checkPreviousOperation(previousOperation);
-                    break;
+                    if (
+                        (buffer.match(/\s/g)?.length === 0 &&
+                            buffer.match(/\./g)?.length < 2) ||
+                        buffer.match(/\s/g)?.length >
+                            buffer.match(/\./g)?.length ||
+                        buffer.match(/\./g)?.length === undefined
+                    ) {
+                        e.target.disable = false;
+                        previousOperation = ".";
+                        checkPreviousOperation(previousOperation);
+                        break;
+                    } else {
+                        e.target.disable = true;
+                        break;
+                    }
                 case "reset":
                     reset();
                     break;
