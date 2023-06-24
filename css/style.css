@@ -16,6 +16,22 @@ body {
   padding: 20px;
   box-shadow: 0 0 30px #000;
   background-color: #071115;
+  border-radius: 15px;
+}
+.wrapper.light {
+  background-color: #fff;
+}
+
+.toggle-btn {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-left: 94%;
+}
+.toggle-btn.active {
+  background-color: #071115;
 }
 
 .screen {
@@ -24,6 +40,9 @@ body {
   text-align: right;
   font-size: 25px;
   padding: 15px 0;
+}
+.screen.light {
+  color: #0a1e23;
 }
 
 .buttons {
@@ -44,9 +63,17 @@ body {
   background-color: rgba(27, 47, 56, 0.6549019608);
   color: #f8fafb;
 }
+.buttons__btn-number.light {
+  background-color: #c3eaff;
+  color: #000000;
+}
 .buttons__btn-operator {
   background-color: #2e1f39;
   color: #aa04a4;
+}
+.buttons__btn-operator.light {
+  background-color: #ffd0fb;
+  color: #f967f3;
 }
 .buttons__btn:hover {
   transform: scale(1.1);
@@ -61,8 +88,16 @@ body {
   background-color: #2d191e;
   color: #bd3740;
 }
+.buttons-reset.light {
+  background-color: #ffd5d8;
+  color: #fc4552;
+}
 .buttons-equal {
   grid-column: 3/5;
   background-color: #223323;
   color: #ffffff;
+}
+.buttons-equal.light {
+  background-color: #adf9e7;
+  color: #000;
 }/*# sourceMappingURL=style.css.map */

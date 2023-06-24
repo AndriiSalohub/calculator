@@ -1,9 +1,12 @@
+const wrapper = document.querySelector(".wrapper");
 const screen = document.querySelector(".screen");
+const toggleBtn = document.querySelector(".toggle-btn");
 const numberBtns = document.querySelectorAll(".buttons__btn-number");
 const operationBtns = document.querySelectorAll(".buttons__btn-operator");
 const delBtn = document.querySelector("#del");
 let buffer = "";
 let previousOperation = "";
+let isDark = true;
 
 const reset = () => {
     buffer = "";
@@ -106,4 +109,19 @@ operationBtns.forEach((operationBtn) => {
             }
         }
     });
+});
+
+toggleBtn.addEventListener("click", () => {
+    wrapper.classList.toggle("light");
+    toggleBtn.classList.toggle("active");
+
+    numberBtns.forEach((numberBtn) => {
+        numberBtn.classList.toggle("light");
+    });
+
+    operationBtns.forEach((operationBtn) => {
+        operationBtn.classList.toggle("light");
+    });
+
+    isDark = !isDark;
 });
