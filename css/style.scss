@@ -45,6 +45,8 @@ body {
     text-align: right;
     font-size: 25px;
     padding: 15px 0;
+    word-break: break-all;
+    max-width: 255px;
     &.light {
         color: #0a1e23;
     }
