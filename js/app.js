@@ -114,6 +114,7 @@ operationBtns.forEach((operationBtn) => {
 toggleBtn.addEventListener("click", () => {
     wrapper.classList.toggle("light");
     toggleBtn.classList.toggle("active");
+    screen.classList.toggle("light");
 
     numberBtns.forEach((numberBtn) => {
         numberBtn.classList.toggle("light");
